@@ -1,1 +1,1 @@
-export * from './game-of-life';
+export * from './GameOfLife.tsx';

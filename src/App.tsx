@@ -1,5 +1,5 @@
-import {FC} from "react";
-import {GameOfLife} from "./pages";
+import { FC } from "react";
+import { GameOfLife } from "./pages";
 
 const App: FC = () => {
   return (
