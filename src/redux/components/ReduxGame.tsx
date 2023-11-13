@@ -1,18 +1,20 @@
-import { FC } from 'react';
-import { useInterval, useUpdateEffect } from 'usehooks-ts';
+import { FC, useCallback } from 'react';
+import { useInterval } from 'usehooks-ts';
 import { useAppDispatch, useAppSelector } from '@/redux';
 import {
-  clear, incGameContainerRenders,
+  clear,
   nextStep,
   setCells,
+  togglePaused,
   setStepInterval,
-  togglePaused
+  incGameContainerRenders
 } from '@/redux/game-of-life.slice.ts';
 import { ActionCreators } from 'redux-undo';
 import { ReduxCell } from './ReduxCell.tsx';
 import { CellGrid, GameControls } from '@/components';
 import { gameOfLifeApi } from '@/redux/game-of-life.api.ts';
 import { ReduxRenderStats } from './ReduxRenderStats.tsx';
+import { useRenderTracker } from '@/shared';
 
 type GameProps = {
   mirror?: boolean;
@@ -35,13 +37,15 @@ const ReduxGame: FC<GameProps> = ({ mirror }) => {
   const dispatch = useAppDispatch();
 
   useInterval(
-    () => dispatch(nextStep()),
+    () => {
+      dispatch(nextStep());
+    },
     paused ? null : stepIntervalMs,
   )
 
-  useUpdateEffect(() => {
-    dispatch(incGameContainerRenders());
-  });
+  useRenderTracker(useCallback((rendersCount) => {
+    dispatch(incGameContainerRenders(rendersCount));
+  }, []));
 
   return (
     <div>

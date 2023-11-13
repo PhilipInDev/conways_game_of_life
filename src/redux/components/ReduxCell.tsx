@@ -1,20 +1,21 @@
 import { FC, useCallback } from 'react';
-// import { useUpdateEffect } from 'usehooks-ts';
 import { Cell } from '@/components';
 import { CellPosition, CellState } from '@/shared/game-of-life.types.ts';
 import { useAppDispatch, useAppSelector } from '@/redux';
 import {
-  // incCellRenders,
+  incCellRenders,
   setCellState
 } from '@/redux/game-of-life.slice.ts';
 import { getGridKey } from '@/helpers/serialize-grid-key.helper.ts';
+import { isEqual } from 'lodash';
+import { useRenderTracker } from '@/shared';
 
 type ReduxCellProps = CellPosition;
 
 const ReduxCell: FC<ReduxCellProps> = ({ x, y }) => {
   const dispatch = useAppDispatch();
 
-  const cell = useAppSelector((state) => state.game.present.cells[getGridKey(x, y)]);
+  const cell = useAppSelector((state) => state.game.present.cells[getGridKey(x, y)], isEqual);
 
   const onSelect = useCallback(() => {
     dispatch(
@@ -23,11 +24,11 @@ const ReduxCell: FC<ReduxCellProps> = ({ x, y }) => {
         position: { x, y },
       })
     )
-  }, [cell?.state, x, y]);
+  }, [cell?.state, x, y])
 
-  // useUpdateEffect(() => {
-  //   dispatch(incCellRenders());
-  // }, [cell]);
+  useRenderTracker((rendersCount) => {
+    dispatch(incCellRenders(rendersCount));
+  });
 
   return (
     <Cell

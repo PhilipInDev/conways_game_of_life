@@ -47,19 +47,19 @@ export const counterSlice = createSlice({
     },
 
     incCellRenders: {
-      reducer: (state) => {
-        state.individualCellRenders++;
+      reducer: (state, action: PayloadAction<number | void>) => {
+        const rendersCount = action.payload || 1;
+
+        state.individualCellRenders += rendersCount;
       },
-      prepare: prepareAutoBatched<void>(),
+      prepare: prepareAutoBatched<number | void>(),
     },
 
-    incGameContainerRenders: (state) => {
-      state.gameContainerRenders++;
-    },
+    incGameContainerRenders: (state, action: PayloadAction<number | undefined>) => {
+      const rendersCount = action.payload || 1;
 
-    setCellRenders: (state, { payload } : PayloadAction<number>) => {
-      state.individualCellRenders = payload;
-    }
+      state.gameContainerRenders += rendersCount;
+    },
   },
 })
 

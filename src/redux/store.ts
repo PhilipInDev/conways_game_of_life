@@ -4,7 +4,6 @@ import type { TypedUseSelectorHook } from 'react-redux'
 import { gameReducer } from './game-of-life.slice.ts';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { gameOfLifeApi } from '@/redux/game-of-life.api.ts';
-import { throttle } from 'lodash';
 import { createStateSyncMiddleware, initMessageListener } from 'redux-state-sync';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -32,7 +31,7 @@ export const store = configureStore({
     ),
   enhancers: (existingEnhancers) => existingEnhancers
     .concat(
-      autoBatchEnhancer({ type: "callback", queueNotification: (notify) => throttle(notify, 100) }),
+      autoBatchEnhancer(),
     ),
 });
 
