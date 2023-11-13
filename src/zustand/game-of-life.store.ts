@@ -1,27 +1,28 @@
 import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
 import { CellGrid, CellPosition, CellState, GameState, initialState } from '@/shared';
 import { getGridKey } from '@/helpers/serialize-grid-key.helper.ts';
 import { calculateNextStep } from '@/helpers/calculate-next-step.helper.ts';
-import { isBoolean } from 'lodash';
+import { isBoolean, omit } from 'lodash';
 import { persist } from 'zustand/middleware';
 import { temporal } from 'zundo';
 import { shared } from 'use-broadcast-ts';
 
 type GameStore = {
-  setCellState (cell: { state: CellState, position: CellPosition }): void;
-  setCells (grid: CellGrid): void;
-  nextStep (): void;
-  setStepInterval (config: { stepIntervalMs: number }): void;
-  togglePaused (paused?: boolean): void;
+  setCellState(cell: { state: CellState, position: CellPosition }): void;
+  setCells(grid: CellGrid): void;
+  nextStep(): void;
+  setStepInterval(config: { stepIntervalMs: number }): void;
+  togglePaused(paused?: boolean): void;
   clear(): void;
-  incCellRenders(): void;
-  incGameContainerRenders(): void;
+  incCellRenders(incCount?: number): void;
+  incGameContainerRenders(incCount?: number): void;
 } & GameState;
 
 const useGameStore = create<GameStore>()(
-  persist(
-    temporal(
-      shared(
+  temporal(
+    shared(
+      persist(
         (set, get) => ({
           ...initialState,
 
@@ -51,23 +52,40 @@ const useGameStore = create<GameStore>()(
 
           clear: () => set({ cells: {}, currentStep: 0 }),
 
-          incCellRenders: () => set({ individualCellRenders: get().individualCellRenders + 1 }),
+          incCellRenders: (incCount = 1) => set({ individualCellRenders: get().individualCellRenders + incCount }),
 
-          incGameContainerRenders: () => set({ gameContainerRenders: get().gameContainerRenders + 1 }),
+          incGameContainerRenders: (incCount = 1) => set({ gameContainerRenders: get().gameContainerRenders + incCount }),
         }),
-        // shared-options
+        // persist-options
         {
-          name: "zustand-game-channel"
+          name: 'zustand-game',
+          partialize: (state) => omit(
+            state,
+            'individualCellRenders',
+            'gameContainerRenders',
+          ),
         }
       ),
+      // shared-options
+      {
+        name: 'zustand-game-channel'
+      }
     ),
-    // persist-options
     {
-      name: 'zustand-game',
+      equality: shallow,
+      partialize: (state) => omit(
+        state,
+        'individualCellRenders',
+        'gameContainerRenders',
+        'paused',
+        'incGameContainerRenders',
+        'incCellRenders'
+      ),
+      limit: 20,
     }
-  )
+  ),
 )
 
-const useGameStoreHistory = create(useGameStore.temporal)
+const useGameStoreHistory = create(useGameStore.temporal);
 
 export { useGameStore, useGameStoreHistory };
