@@ -76,10 +76,10 @@ dependencies:
     version: 3.22.4
   zundo:
     specifier: ^2.0.0
-    version: 2.0.0(zustand@4.4.1)
+    version: 2.0.0(zustand@4.4.6)
   zustand:
-    specifier: ^4.4.1
-    version: 4.4.1(@types/react@18.2.24)(react@18.2.0)
+    specifier: ^4.4.6
+    version: 4.4.6(@types/react@18.2.24)(react@18.2.0)
 
 devDependencies:
   '@types/node':
@@ -2877,7 +2877,7 @@ packages:
     dependencies:
       react: 18.2.0
     optionalDependencies:
-      zustand: 4.4.1(@types/react@18.2.24)(react@18.2.0)
+      zustand: 4.4.6(@types/react@18.2.24)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -3004,16 +3004,16 @@ packages:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
 
-  /zundo@2.0.0(zustand@4.4.1):
+  /zundo@2.0.0(zustand@4.4.6):
     resolution: {integrity: sha512-XzKDyunmyxvQHKDjgTmOClOQscJAm5NAa1iEazR0DilvV/uwCjnDwlHJuJ+GmG/oj5RMjzsD0ptghZzjEj1w4g==}
     peerDependencies:
       zustand: ^4.3.0
     dependencies:
-      zustand: 4.4.1(@types/react@18.2.24)(react@18.2.0)
+      zustand: 4.4.6(@types/react@18.2.24)(react@18.2.0)
     dev: false
 
-  /zustand@4.4.1(@types/react@18.2.24)(react@18.2.0):
-    resolution: {integrity: sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==}
+  /zustand@4.4.6(@types/react@18.2.24)(react@18.2.0):
+    resolution: {integrity: sha512-Rb16eW55gqL4W2XZpJh0fnrATxYEG3Apl2gfHTyDSE965x/zxslTikpNch0JgNjJA9zK6gEFW8Fl6d1rTZaqgg==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
