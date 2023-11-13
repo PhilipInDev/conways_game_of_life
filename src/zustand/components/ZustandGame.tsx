@@ -1,10 +1,11 @@
-import { FC, useTransition } from 'react';
-import { useInterval, useUpdateEffect } from 'usehooks-ts';
+import { FC } from 'react';
+import { useInterval } from 'usehooks-ts';
 import { ZustandCell } from './ZustandCell.tsx';
 import { CellGrid, GameControls } from '@/components';
 import { ZustandRenderStats } from './ZustandRenderStats.tsx';
 import { useGameStore, useGameStoreHistory } from '@/zustand/game-of-life.store.ts';
 import { GameOfLifeApi } from '@/zustand/game-of-life.api.ts';
+import { useRenderTracker } from '@/shared';
 
 type GameProps = {
   mirror?: boolean;
@@ -16,8 +17,8 @@ const ZustandGame: FC<GameProps> = ({ mirror }) => {
   const stepIntervalMs = useGameStore((state) => state.stepIntervalMs);
   const paused = useGameStore((state) => state.paused);
   const currentStep = useGameStore((state) => state.currentStep);
-  const undoAvailable = useGameStoreHistory((state) => !!state.pastStates);
-  const redoAvailable = useGameStoreHistory((state) => !!state.futureStates);
+  const undoAvailable = useGameStoreHistory((state) => !!state.pastStates.length);
+  const redoAvailable = useGameStoreHistory((state) => !!state.futureStates.length);
 
   const nextStep = useGameStore((state) => state.nextStep);
   const incGameContainerRenders = useGameStore((state) => state.incGameContainerRenders);
@@ -25,29 +26,27 @@ const ZustandGame: FC<GameProps> = ({ mirror }) => {
   const togglePaused = useGameStore((state) => state.togglePaused);
   const setStepInterval = useGameStore((state) => state.setStepInterval);
   const setCells = useGameStore((state) => state.setCells);
-  const undo = useGameStoreHistory((state) => state.undo);
   const redo = useGameStoreHistory((state) => state.redo);
+  const undo = useGameStoreHistory((state) => state.undo);
 
   const {
     data: templates,
     isInitialLoading: templatesLoading,
   } = GameOfLifeApi.useTemplates();
 
-  const [_, startTransition] = useTransition();
-
   useInterval(
-    () => startTransition(nextStep),
+    nextStep,
     paused ? null : stepIntervalMs,
   )
 
-  useUpdateEffect(incGameContainerRenders);
+  useRenderTracker(incGameContainerRenders);
 
   return (
     <div>
       <GameControls
         onNextStep={nextStep}
-        onUndo={undo}
-        onRedo={redo}
+        onUndo={() => undo()}
+        onRedo={() => redo()}
         onClear={() => {
           clear();
           togglePaused(true);
