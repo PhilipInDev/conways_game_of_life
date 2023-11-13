@@ -10,7 +10,6 @@ const initialState: GameState = {
 
   individualCellRenders: 0,
   gameContainerRenders: 0,
-  gameControlsRenders: 0,
 };
 
 const templates: GameTemplates = [

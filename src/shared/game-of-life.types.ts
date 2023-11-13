@@ -25,7 +25,6 @@ type CellGrid = {
 
 type RenderState = {
   individualCellRenders: number;
-  gameControlsRenders: number;
   gameContainerRenders: number;
 }
 
