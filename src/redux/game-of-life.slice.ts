@@ -44,8 +44,6 @@ export const counterSlice = createSlice({
     clear: (state) => {
       state.cells = {};
       state.currentStep = 0;
-      state.individualCellRenders = 0;
-      state.gameContainerRenders = 0;
     },
 
     incCellRenders: {

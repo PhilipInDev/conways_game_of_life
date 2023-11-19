@@ -50,7 +50,7 @@ const useGameStore = create<GameStore>()(
 
           togglePaused: (paused) => set({ paused: isBoolean(paused) ? paused : !get().paused }),
 
-          clear: () => set({ cells: {}, currentStep: 0, individualCellRenders: 0, gameContainerRenders: 0 }),
+          clear: () => set({ cells: {}, currentStep: 0 }),
 
           incCellRenders: (incCount = 1) => set({ individualCellRenders: get().individualCellRenders + incCount }),
 
