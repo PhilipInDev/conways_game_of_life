@@ -1,13 +1,13 @@
-import { ChangeEventHandler, FC, useCallback } from 'react';
+import { ChangeEventHandler, FC, useCallback, useState } from 'react';
 import { Button } from '@/components/ui/Button.tsx';
 import { Input } from '@/components/ui/Input.tsx';
 import * as u from 'zod';
 import {
   Select,
   SelectContent,
-  SelectGroup, SelectItem,
+  SelectGroup,
+  SelectItem,
   SelectLabel,
-  // SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/Select.tsx';
@@ -21,16 +21,17 @@ import {
   TrashIcon,
 } from '@radix-ui/react-icons'
 import { GameTemplates } from '@/shared/game-of-life.types.ts';
+import { isNumber } from 'lodash';
 
 type GameControlsProps = {
   onNextStep: () => void;
-  currentStep: number;
-  onUndo: () => void;
-  onRedo: () => void;
+  currentStep?: number;
+  onUndo?: () => void;
+  onRedo?: () => void;
   onClear: () => void;
   onPause: () => void;
-  undoAvailable: boolean;
-  redoAvailable: boolean;
+  undoAvailable?: boolean;
+  redoAvailable?: boolean;
   paused: boolean;
   stepIntervalMs: number;
   onStepIntervalChange: (intervalMs: number) => void;
@@ -55,29 +56,36 @@ const GameControls: FC<GameControlsProps> = ({
   redoAvailable,
   templates: { list, loading, onSelect }
 }) => {
+  const [localStepIntervalMs, setLocalStepIntervalMs] = useState(stepIntervalMs);
   const onIntervalChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (e) => {
-      const value = stepIntervalSchema.parse(Number(e.currentTarget.value));
-      onStepIntervalChange(value);
+      const res = stepIntervalSchema.safeParse(Number(e.currentTarget.value));
+
+      setLocalStepIntervalMs(Number(e.currentTarget.value))
+      if (res.success) onStepIntervalChange(res.data);
     },
     [onStepIntervalChange],
   );
 
   return (
-    <div className="flex items-center gap-3 p-3">
+    <div
+      className="flex items-center gap-3 p-3 overflow-y-auto"
+    >
       <label className="flex gap-2 items-center">
         <span>Step interval, ms</span>
         <Input
-          className="w-20"
-          value={stepIntervalMs}
+          className="w-20 h-9"
+          value={localStepIntervalMs}
           placeholder="Step interval, ms"
           onChange={onIntervalChange}
         />
       </label>
 
       <Select disabled={loading} onValueChange={onSelect}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select template" />
+        <SelectTrigger className="w-[180px] h-9">
+          <SelectValue
+            placeholder="Select template"
+          />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -89,24 +97,30 @@ const GameControls: FC<GameControlsProps> = ({
         </SelectContent>
       </Select>
 
-      <Button onClick={onPause}>
+      <Button size="sm" onClick={onPause}>
         {paused
           ?  currentStep === 0 ? <PlayIcon /> : <ResumeIcon />
           : <PauseIcon />} {' '}
       </Button>
-      <Button onClick={onNextStep}>
+
+      <Button size="sm" onClick={onNextStep}>
         <TrackNextIcon />
-        <span className="ml-1">
-          (Step: {currentStep})
-        </span>
+        {isNumber(currentStep) && (
+          <span className="ml-1">
+            (Step: {currentStep})
+          </span>
+        )}
       </Button>
-      <Button onClick={onUndo} disabled={!undoAvailable}>
-        <ResetIcon />
-      </Button>
-      <Button onClick={onRedo} disabled={!redoAvailable}>
-        <ReloadIcon />
-      </Button>
-      <Button onClick={onClear}>
+
+      {onUndo && <Button size="sm" onClick={onUndo} disabled={!undoAvailable}>
+        <ResetIcon/>
+      </Button>}
+
+      {onRedo && <Button size="sm" onClick={onRedo} disabled={!redoAvailable}>
+        <ReloadIcon/>
+      </Button>}
+
+      <Button size="sm" onClick={onClear}>
         <TrashIcon />
       </Button>
     </div>
