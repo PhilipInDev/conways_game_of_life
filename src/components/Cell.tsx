@@ -21,7 +21,7 @@ const Cell: FC<CellProps> = ({ state, onClick, visited, beingLiveSteps }) => {
         }
       }}
       className={cn(
-        'w-5 h-5 border inline-flex select-none',
+        'w-4 h-4 border inline-flex select-none',
         {
           'bg-gray-100': visited,
           'bg-white': !visited && state === CellState.DEAD,
