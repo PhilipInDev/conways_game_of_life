@@ -1,9 +1,9 @@
-import { createQuery } from 'react-query-kit';
+import { useQuery } from '@tanstack/react-query';
 import { fetchTemplates } from '@/shared';
 
-const useTemplates = createQuery({
-  primaryKey: 'GET:/templates',
-  queryFn: fetchTemplates
+const useTemplates = () => useQuery({
+  queryKey: ['GET:/templates'],
+  queryFn: fetchTemplates,
 })
 
 const GameOfLifeApi = {
