@@ -7,14 +7,12 @@ import { gameOfLifeApi } from '@/redux/game-of-life.api.ts';
 import { createStateSyncMiddleware, initMessageListener } from 'redux-state-sync';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { UndoTransform } from './store.utils.ts';
 import { GameState } from 'src/shared';
 import { StateWithHistory } from 'redux-undo';
 
 const persistConfig = {
   key: 'root',
   storage,
-  transforms: [UndoTransform],
 }
 
 const persistedReducer = persistReducer<StateWithHistory<GameState>>(persistConfig, gameReducer)
