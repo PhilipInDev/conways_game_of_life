@@ -2,10 +2,7 @@ import { FC, useCallback } from 'react';
 import { Cell } from '@/components';
 import { CellPosition, CellState } from '@/shared/game-of-life.types.ts';
 import { useAppDispatch, useAppSelector } from '@/redux';
-import {
-  incCellRenders,
-  setCellState
-} from '@/redux/game-of-life.slice.ts';
+import { incCellRenders, setCellState } from '@/redux/game-of-life.slice.ts';
 import { getGridKey } from '@/helpers/serialize-grid-key.helper.ts';
 import { isEqual } from 'lodash';
 import { useRenderTracker } from '@/shared';

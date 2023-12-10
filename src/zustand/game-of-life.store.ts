@@ -78,8 +78,6 @@ const useGameStore = create<GameStore>()(
         'individualCellRenders',
         'gameContainerRenders',
         'paused',
-        'incGameContainerRenders',
-        'incCellRenders'
       ),
       limit: 20,
     }
