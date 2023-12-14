@@ -1,8 +1,8 @@
 import { FC, useCallback } from 'react';
 import { Cell } from '@/components';
-import { CellPosition, CellState } from '@/shared/game-of-life.types.ts';
-import { getGridKey } from '@/helpers/serialize-grid-key.helper.ts';
-import { useGameStore } from '@/zustand/game-of-life.store.ts';
+import { CellPosition, CellState } from '@/shared/game-of-life.types';
+import { getGridKey } from '@/helpers/serialize-grid-key.helper';
+import { useGameStore } from '@/zustand/game-of-life.store';
 import { useRenderTracker } from '@/shared';
 import { isEqual } from 'lodash';
 

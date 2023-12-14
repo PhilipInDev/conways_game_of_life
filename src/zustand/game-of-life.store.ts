@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { shallow } from 'zustand/shallow';
 import { CellGrid, CellPosition, CellState, GameState, initialState } from '@/shared';
-import { getGridKey } from '@/helpers/serialize-grid-key.helper.ts';
-import { calculateNextStep } from '@/helpers/calculate-next-step.helper.ts';
+import { getGridKey } from '@/helpers/serialize-grid-key.helper';
+import { calculateNextStep } from '@/helpers/calculate-next-step.helper';
 import { isBoolean, omit } from 'lodash';
 import { persist } from 'zustand/middleware';
 import { temporal } from 'zundo';

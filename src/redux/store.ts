@@ -1,9 +1,9 @@
 import { autoBatchEnhancer, configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
-import { gameReducer } from './game-of-life.slice.ts';
+import { gameReducer } from './game-of-life.slice';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
-import { gameOfLifeApi } from '@/redux/game-of-life.api.ts';
+import { gameOfLifeApi } from '@/redux/game-of-life.api';
 import { createStateSyncMiddleware, initMessageListener } from 'redux-state-sync';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';

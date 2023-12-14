@@ -1,14 +1,14 @@
 import { FC, useState } from 'react';
 import { GameControls } from '@/components';
-import { GameOfLifeApi } from '@/zustand/game-of-life.api.ts';
-import { useGameStore as useZustandGameStore } from '@/zustand/game-of-life.store.ts';
+import { GameOfLifeApi } from '@/zustand/game-of-life.api';
+import { useGameStore as useZustandGameStore } from '@/zustand/game-of-life.store';
 import { useAppDispatch } from '@/redux';
 import {
   nextStep,
   togglePaused,
   setStepInterval,
   setCells, clear
-} from '@/redux/game-of-life.slice.ts';
+} from '@/redux/game-of-life.slice';
 
 type SharedGameControlsProps = {};
 

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FC, useCallback, useState } from 'react';
-import { Button } from '@/components/ui/Button.tsx';
-import { Input } from '@/components/ui/Input.tsx';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import * as u from 'zod';
 import {
   Select,
@@ -10,7 +10,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/Select.tsx';
+} from '@/components/ui/Select';
 import {
   TrackNextIcon,
   PauseIcon,
@@ -20,7 +20,7 @@ import {
   ResetIcon,
   TrashIcon,
 } from '@radix-ui/react-icons'
-import { GameTemplates } from '@/shared/game-of-life.types.ts';
+import { GameTemplates } from '@/shared/game-of-life.types';
 import { isNumber } from 'lodash';
 
 type GameControlsProps = {

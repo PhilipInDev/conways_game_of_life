@@ -2,10 +2,10 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice, prepareAutoBatched } from '@reduxjs/toolkit';
 import { isBoolean } from 'lodash';
 import undoable, { includeAction } from 'redux-undo';
-import { initialState } from '@/shared/initial-state.ts';
-import { CellGrid, CellPosition, CellState } from '@/shared/game-of-life.types.ts';
-import { calculateNextStep } from '../helpers/calculate-next-step.helper.ts';
-import { getGridKey } from '../helpers/serialize-grid-key.helper.ts';
+import { initialState } from '@/shared/initial-state';
+import { CellGrid, CellPosition, CellState } from '@/shared/game-of-life.types';
+import { calculateNextStep } from '../helpers/calculate-next-step.helper';
+import { getGridKey } from '../helpers/serialize-grid-key.helper';
 
 export const counterSlice = createSlice({
   name: 'game',

@@ -1,5 +1,5 @@
-import { CellGrid, CellState } from '@/shared/game-of-life.types.ts';
-import { getGridKey } from './serialize-grid-key.helper.ts';
+import { CellGrid, CellState } from '@/shared/game-of-life.types';
+import { getGridKey } from './serialize-grid-key.helper';
 
 const calculateNextStep = (cellGrid: CellGrid, { rowCount, colCount } : { rowCount: number; colCount: number }): CellGrid => {
   const newGrid = { ...cellGrid };

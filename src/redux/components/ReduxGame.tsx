@@ -8,12 +8,12 @@ import {
   togglePaused,
   setStepInterval,
   incGameContainerRenders
-} from '@/redux/game-of-life.slice.ts';
+} from '@/redux/game-of-life.slice';
 import { ActionCreators } from 'redux-undo';
-import { ReduxCell } from './ReduxCell.tsx';
+import { ReduxCell } from './ReduxCell';
 import { CellGrid, GameControls } from '@/components';
-import { gameOfLifeApi } from '@/redux/game-of-life.api.ts';
-import { ReduxRenderStats } from './ReduxRenderStats.tsx';
+import { gameOfLifeApi } from '@/redux/game-of-life.api';
+import { ReduxRenderStats } from './ReduxRenderStats';
 import { useRenderTracker } from '@/shared';
 
 type GameProps = {

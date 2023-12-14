@@ -1,4 +1,4 @@
-import { CellState, GameState, GameTemplates } from '@/shared/game-of-life.types.ts';
+import { CellState, GameState, GameTemplates } from '@/shared/game-of-life.types';
 
 const initialState: GameState = {
   cells: {},

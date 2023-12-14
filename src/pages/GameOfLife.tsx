@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ReduxGame } from '@/redux/components';
 import { ZustandGame } from '@/zustand/components';
-import { SharedGameControls } from '@/pages/SharedGameControls.tsx';
+import { SharedGameControls } from '@/pages/SharedGameControls';
 
 type GameOfLifeProps = {};
 

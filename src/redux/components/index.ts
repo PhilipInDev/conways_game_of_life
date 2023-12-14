@@ -1,1 +1,1 @@
-export * from './ReduxGame.tsx';
+export * from './ReduxGame';

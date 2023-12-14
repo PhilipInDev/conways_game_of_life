@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { cn } from '@/helpers/ui.ts';
+import { cn } from '@/helpers/ui';
 import { CellState } from '@/shared/game-of-life.types';
 
 type CellProps = {

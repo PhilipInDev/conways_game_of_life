@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { RenderStats } from '@/components';
-import { useGameStore } from '@/zustand/game-of-life.store.ts';
+import { useGameStore } from '@/zustand/game-of-life.store';
 
 const ZustandRenderStats: FC = () => {
     const individualCellRenders = useGameStore((state) => state.individualCellRenders);

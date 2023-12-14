@@ -1,1 +1,1 @@
-export * from './ZustandGame.tsx';
+export * from './ZustandGame';

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useInterval } from 'usehooks-ts';
-import { ZustandCell } from './ZustandCell.tsx';
+import { ZustandCell } from './ZustandCell';
 import { CellGrid, GameControls } from '@/components';
-import { ZustandRenderStats } from './ZustandRenderStats.tsx';
-import { useGameStore, useGameStoreHistory } from '@/zustand/game-of-life.store.ts';
-import { GameOfLifeApi } from '@/zustand/game-of-life.api.ts';
+import { ZustandRenderStats } from './ZustandRenderStats';
+import { useGameStore, useGameStoreHistory } from '@/zustand/game-of-life.store';
+import { GameOfLifeApi } from '@/zustand/game-of-life.api';
 import { useRenderTracker } from '@/shared';
 
 type GameProps = {
