@@ -79,6 +79,7 @@ const useGameStore = create<GameStore>()(
         'gameContainerRenders',
         'paused',
       ),
+      wrapTemporal: (tempStore) => persist(tempStore, { name: 'zustand-game-history' }),
       limit: 20,
     }
   ),
