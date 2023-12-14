@@ -14,7 +14,7 @@ const CellGrid: FC<CellGridProps> = ({ rowCount, colCount, mirror, children: Cel
   return (
     <div className="flex flex-col">
       {rows.map((_, rowIdx) => (
-        <div className="flex">
+        <div className="flex" key={rowIdx}>
           <CellRow rowIdx={rowIdx} colCount={colCount} mirror={mirror}>
             {Cell}
           </CellRow>
@@ -32,7 +32,7 @@ const CellRow: FC<CellRowProps> = ({ children: Cell, colCount, rowIdx, mirror })
   const cols = useMemo(() => Array.from({ length: colCount }), [colCount]);
 
   const cells = useMemo(() => cols.map((_, colIdx) => (
-    <Cell x={colIdx} y={rowIdx}/>
+    <Cell key={colIdx} x={colIdx} y={rowIdx}/>
   )), [cols, rowIdx]);
 
   if (mirror) return <>{cells.reverse()}</>;
