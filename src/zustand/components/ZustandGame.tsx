@@ -31,7 +31,7 @@ const ZustandGame: FC<GameProps> = ({ mirror }) => {
 
   const {
     data: templates,
-    isInitialLoading: templatesLoading,
+    isLoading: templatesLoading,
   } = GameOfLifeApi.useTemplates();
 
   useInterval(
